@@ -86,7 +86,8 @@ export default defineConfig(({ mode }) => {
   }
 
   return mergeConfig(baseConfig, {
-    base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : '/',
+    // base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : '/',
+    base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : `${name}`,
     build: {
       rolldownOptions: {
         output: {

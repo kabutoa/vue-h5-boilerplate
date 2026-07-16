@@ -40,3 +40,6 @@ __screenshots__/
 
 # Skills
 .agents
+
+src/typings/auto-imports.d.ts
+src/typings/components.d.ts
