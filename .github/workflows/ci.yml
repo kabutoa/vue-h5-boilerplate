@@ -6,7 +6,7 @@ on:
     branches: [main, master]
 
 jobs:
-  quality:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -15,7 +15,7 @@ jobs:
           version: 10
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
