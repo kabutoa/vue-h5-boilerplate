@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "@/styles/variables.scss" as *;`,
+          additionalData: `@use "@/styles/mixin.scss" as *;`,
         },
       },
     },
@@ -86,7 +86,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return mergeConfig(baseConfig, {
-    base: `${env.VITE_CDN_PATH}${name}`,
+    base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : '/',
     build: {
       rolldownOptions: {
         output: {

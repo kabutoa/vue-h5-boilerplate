@@ -1,0 +1,11 @@
+$design-width: 375;
+
+@function px2vw($px) {
+  @return calc($px / $design-width * 100vw);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

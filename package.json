@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@iconify/json": "^2.2.500",
+    "@vueuse/core": "^14.3.0",
     "axios": "^1.18.1",
     "minireset.css": "^0.0.7",
     "pinia": "^3.0.4",

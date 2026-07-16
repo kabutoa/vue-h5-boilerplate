@@ -7,4 +7,6 @@ interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   /** CDN 路径 */
   readonly VITE_CDN_PATH: string
+  /** 是否启用 CDN */
+  readonly VITE_ENABLE_CDN: string
 }

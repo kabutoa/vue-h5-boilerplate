@@ -1,5 +1,11 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div>home</div>
+  <div class="home">home</div>
 </template>
+
+<style lang="scss" scoped>
+.home {
+  @include flex-center;
+}
+</style>
