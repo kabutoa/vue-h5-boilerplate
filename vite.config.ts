@@ -15,7 +15,14 @@ import { name } from './package.json'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '') as unknown as ImportMetaEnv
 
-  const { VITE_BASE_URL, VITE_CDN_PATH, VITE_ENABLE_CDN } = env
+  const {
+    VITE_API_PREFIX,
+    VITE_API_URL,
+    VITE_BASE_URL,
+    VITE_CDN_PATH,
+    VITE_ENABLE_CDN,
+    VITE_ENABLE_MOCK,
+  } = env
 
   const isProd = mode === 'production'
 
@@ -82,6 +89,16 @@ export default defineConfig(({ mode }) => {
         open: true,
         port: 4000,
       },
+      proxy:
+        VITE_ENABLE_MOCK === 'true'
+          ? null
+          : {
+              [`${VITE_API_PREFIX}`]: {
+                changeOrigin: true,
+                rewrite: (path: string) => path.replace(/^\/${VITE_API_PREFIX}/, ''),
+                target: VITE_API_URL,
+              },
+            },
       server: {
         host: true,
         open: true,
