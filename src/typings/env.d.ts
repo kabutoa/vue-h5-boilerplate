@@ -3,10 +3,11 @@ interface ImportMeta {
 }
 
 interface ImportMetaEnv {
-  /** 项目名称 */
+  readonly VITE_API_PREFIX: string
   readonly VITE_APP_TITLE: string
-  /** CDN 路径 */
+  readonly VITE_BASE_URL: string
   readonly VITE_CDN_PATH: string
-  /** 是否启用 CDN */
   readonly VITE_ENABLE_CDN: string
+  readonly VITE_ENABLE_MOCK: string
+  readonly VITE_ROUTER_MODE: 'hash' | 'history'
 }

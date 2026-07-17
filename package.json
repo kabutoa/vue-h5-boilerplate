@@ -17,8 +17,12 @@
     "boilerplate"
   ],
   "scripts": {
+    "postinstall": "node scripts/check-package-manager.js",
     "dev": "vite",
+    "dev:test": "vite --mode test",
+    "dev:mock": "vite --mode mock",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:gh-pages": "pnpm run build -- --mode github",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
@@ -77,6 +81,7 @@
     "vue-eslint-parser": "^10.4.1",
     "vue-tsc": "^3.3.5"
   },
+  "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": "^22.18.0 || >=24.12.0"
   },

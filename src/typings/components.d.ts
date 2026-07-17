@@ -21,8 +21,8 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
-  const CommonHeader: (typeof import('./../components/common-header/index.vue'))['default']
-  const Loading: (typeof import('./../components/loading/index.vue'))['default']
-  const RouterLink: (typeof import('vue-router'))['RouterLink']
-  const RouterView: (typeof import('vue-router'))['RouterView']
+  const CommonHeader: typeof import('./../components/common-header/index.vue')['default']
+  const Loading: typeof import('./../components/loading/index.vue')['default']
+  const RouterLink: typeof import('vue-router')['RouterLink']
+  const RouterView: typeof import('vue-router')['RouterView']
 }

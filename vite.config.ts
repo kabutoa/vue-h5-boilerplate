@@ -15,6 +15,8 @@ import { name } from './package.json'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '') as unknown as ImportMetaEnv
 
+  const { VITE_BASE_URL, VITE_CDN_PATH, VITE_ENABLE_CDN } = env
+
   const isProd = mode === 'production'
 
   const baseConfig: UserConfig = {
@@ -86,8 +88,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return mergeConfig(baseConfig, {
-    // base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : '/',
-    base: env.VITE_ENABLE_CDN === 'true' ? `${env.VITE_CDN_PATH}${name}` : `${name}`,
+    base: VITE_ENABLE_CDN === 'true' ? `${VITE_CDN_PATH}${name}` : VITE_BASE_URL,
     build: {
       rolldownOptions: {
         output: {
