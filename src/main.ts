@@ -1,21 +1,25 @@
 import '@/styles/main.scss'
 
-import { createPinia } from 'pinia'
-import { createApp } from 'vue'
+import type { App } from 'vue'
 
-import App from './App.vue'
-import router from './router'
+import AppContainer from './App.vue'
+import { setupRouter } from './router'
+import { setupStore } from './stores'
 
-function bootstrap() {
-  const app = createApp(App)
+async function bootstrap() {
+  const app = createApp(AppContainer)
 
-  if (import.meta.env.MODE === 'development') {
-    import('vconsole').then(({ default: VConsole }) => {
-      new VConsole()
-    })
-  }
+  /* 注册模块 指令和静态资源 */
+  Object.values(
+    import.meta.glob<{ install: (app: App) => void }>('./plugins/*.ts', {
+      eager: true,
+    }),
+  ).map((i) => app.use(i))
 
-  app.use(createPinia()).use(router).mount('#app')
+  setupStore(app)
+  await setupRouter(app)
+
+  app.mount('#app')
 }
 
-bootstrap()
+void bootstrap()

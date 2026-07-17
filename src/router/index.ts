@@ -1,10 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import type { App } from 'vue'
 
-import routes from './routes'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+import { setupRouterGuard } from './guard'
+import { routes } from './routes'
+
+export const router = createRouter({
+  history:
+    import.meta.env.VITE_HISTORY_MODE === 'hash' ? createWebHashHistory() : createWebHistory(),
   routes,
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
-export default router
+export async function setupRouter(app: App) {
+  setupRouterGuard(router)
+  app.use(router)
+  await router.isReady()
+}

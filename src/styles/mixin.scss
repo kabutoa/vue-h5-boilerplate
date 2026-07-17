@@ -1,11 +1,123 @@
-$design-width: 375;
+@use 'variable' as *;
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
 
-@function px2vw($px) {
-  @return calc($px / $design-width * 100vw);
+// 横屏
+@mixin widescreen {
+  @media screen and (max-aspect-ratio: list.slash($landscape-ui-width, $landscape-ui-height)) {
+    & {
+      @content;
+    }
+  }
 }
 
-@mixin flex-center {
+@mixin _px2vh($prop, $values...) {
+  $max: list.length($values);
+  $vhValues: '';
+
+  @for $i from 1 through $max {
+    $value: list.nth($values, $i);
+
+    @if (meta.type-of($value) == string) or ($value == 0) {
+      $vhValues: #{$vhValues + $value};
+    } @else {
+      $vhValues: #{$vhValues + math.div(math.round($value), $landscape-ui-height) * 100}vh;
+    }
+
+    @if $i < $max {
+      $vhValues: #{$vhValues + ' '};
+    }
+  }
+  #{$prop}: $vhValues;
+}
+
+@mixin _px2vw($prop, $values...) {
+  $max: list.length($values);
+  $vwValues: '';
+
+  @for $i from 1 through $max {
+    $value: list.nth($values, $i);
+
+    @if (meta.type-of($value) == string) or ($value == 0) {
+      $vwValues: #{$vwValues + $value};
+    } @else {
+      $vwValues: #{$vwValues + math.div(math.round($value), $landscape-ui-width) * 100}vw;
+    }
+
+    @if $i < $max {
+      $vwValues: #{$vwValues + ' '};
+    }
+  }
+  #{$prop}: $vwValues;
+}
+
+// eg: @include px2res(margin, -10px, 'auto', -20px);
+@mixin px2res($prop, $values...) {
+  @include _px2vh($prop, $values...);
+  @include widescreen {
+    @include _px2vw($prop, $values...);
+  }
+}
+
+// 竖屏
+@function px2vw($px) {
+  @return calc($px / $portrait-ui-width * 100vw);
+}
+
+@mixin gridcc {
+  display: grid;
+  place-items: center;
+}
+
+@mixin flexcc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexac {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flexjc {
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+@mixin text-gradient($values...) {
+  background-image: linear-gradient($values);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin mask {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+}
+
+@mixin portrait {
+  @media screen and (orientation: portrait) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin muti-h {
+  @for $i from 1 through 6 {
+    h#{7 - $i} {
+      @content;
+    }
+  }
+}
+
+@mixin line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

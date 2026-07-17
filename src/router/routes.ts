@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-const routes: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
   {
     component: () => import('@/views/home/index.vue'),
     meta: {
@@ -38,5 +38,3 @@ const routes: RouteRecordRaw[] = [
     redirect: '/',
   },
 ]
-
-export default routes

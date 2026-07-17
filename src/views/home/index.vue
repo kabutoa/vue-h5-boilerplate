@@ -6,6 +6,6 @@
 
 <style lang="scss" scoped>
 .home {
-  @include flex-center;
+  @include flexcc;
 }
 </style>
