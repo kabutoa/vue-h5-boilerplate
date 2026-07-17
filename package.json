@@ -21,6 +21,8 @@
     "dev": "vite",
     "dev:test": "vite --mode test",
     "dev:mock": "vite --mode mock",
+    "mock": "cd mock && pnpm run dev",
+    "mock:dev": "pnpm run dev:mock & pnpm run mock & wait",
     "build": "run-p type-check \"build-only {@}\" --",
     "build:gh-pages": "pnpm run build -- --mode github",
     "preview": "vite preview",

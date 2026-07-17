@@ -1,0 +1,22 @@
+{
+  "name": "mock",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --config nodemon.json"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mockjs": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/mockjs": "^1.0.10",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.20.4"
+  }
+}
